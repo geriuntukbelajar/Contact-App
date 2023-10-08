@@ -26,7 +26,7 @@ yargs.command({
     },
 }).demandCommand();
 
-//menampilakn daftar semua nama & no hp contact
+// menampilkan daftar semua nama & no hp contact
 yargs.command({
     command: 'list',
     describe: 'Menampilkan semua nama & no HP contact',
@@ -34,5 +34,22 @@ yargs.command({
         contacts.listContact();
     },
 });
+
+// menampilkan detail sebuah kontak
+yargs.command({
+    command: 'detail',
+    describe: 'Menampilkan detail sebuah kontak berdasarkan nama',
+    builder: {
+        nama: {
+            describe: 'Nama lengkap',
+            demandOption: true,
+            type: 'string',
+        },
+    },
+    handler(argv) {
+        contacts.detailContact(argv.nama);
+    },
+});
+
 
 yargs.parse();
