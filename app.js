@@ -24,6 +24,15 @@ yargs.command({
     handler(argv) {
         contacts.simpanContact(argv.nama,argv.email,argv.noHP);
     },
+}).demandCommand();
+
+//menampilakn daftar semua nama & no hp contact
+yargs.command({
+    command: 'list',
+    describe: 'Menampilkan semua nama & no HP contact',
+    handler() {
+        contacts.listContact();
+    },
 });
 
 yargs.parse();
