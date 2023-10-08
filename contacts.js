@@ -1,5 +1,6 @@
 const fs = require('node:fs');
 const chalk = require('chalk');
+const validator = require('validator');
 
 // membuat folder data kalau gak ada
 const dirPath = './data';
@@ -25,6 +26,16 @@ const simpanContact = (nama,email,noHp) => {
             chalk.red.inverse.bold('Contact sudah terdaftar, gunakan nama lain!')
         );
         return false;
+    }
+
+    //cek email
+    if(email){
+        if(!validator.isEmail(email)){
+            console.log(
+                chalk.red.inverse.bold('Email tidak valid!')
+            );
+            return false;
+        }
     }
 
     contacts.push(contact);
