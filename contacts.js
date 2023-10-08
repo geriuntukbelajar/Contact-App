@@ -22,26 +22,28 @@ const simpanContact = (nama,email,noHp) => {
     //cek duplikat
     const duplikat = contacts.find((contact) => contact.nama === nama);
     if(duplikat){
-        console.log(
-            chalk.red.inverse.bold('Contact sudah terdaftar, gunakan nama lain!')
-        );
+        console.log(chalk.red.inverse.bold('Contact sudah terdaftar, gunakan nama lain!'));
         return false;
     }
 
     //cek email
     if(email){
         if(!validator.isEmail(email)){
-            console.log(
-                chalk.red.inverse.bold('Email tidak valid!')
-            );
+            console.log(chalk.red.inverse.bold('Email tidak valid!'));
             return false;
         }
+    }
+
+    //cek no hp
+    if(!validator.isMobilePhone(noHp, 'id-ID')){
+        console.log(chalk.red.inverse.bold('Nomor HP tidak valid!'));
+        return false;
     }
 
     contacts.push(contact);
 
     fs.writeFileSync('data/contacts.json',JSON.stringify(contacts));
-    console.log('Terima kasih sudah memasukkan data anda');
+    console.log(chalk.green.inverse.bold('Terima kasih sudah memasukkan data anda'));
 
 };
 
